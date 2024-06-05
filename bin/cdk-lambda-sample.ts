@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib';
-import { CdkLambdaSampleStack } from '../lib/cdk-lambda-sample-stack';
+import { CdkLambdaStack } from '../lib/serverless-bedrock-app';
 
 const app = new cdk.App();
-new CdkLambdaSampleStack(app, 'CdkLambdaSampleStack');
+new CdkLambdaStack(app, 'CdkLambdaSampleStack');
