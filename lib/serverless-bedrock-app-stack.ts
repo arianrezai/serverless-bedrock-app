@@ -1,17 +1,34 @@
-import { Stack, StackProps, App,} from 'aws-cdk-lib';
 import * as cdk from 'aws-cdk-lib';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as iam from 'aws-cdk-lib/aws-iam';
 
-export class CdkLambdaStack extends Stack {
-  constructor(scope: App, id: string, props?: StackProps) {
+export class ServerlessBedrockAppStack extends cdk.Stack {
+  constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    new lambda.Function(this, 'LambdaNodeStack', {
+
+    const lambdaFunction = new lambda.Function(this, 'LambdaNodeStack', {
       code: lambda.Code.fromAsset('./src'),
-      functionName: "lambdaNode",
+      functionName: 'BedrockInvocationLambda',
       handler: 'index.handler',
       memorySize: 1024,
-      runtime: lambda.Runtime.NODEJS_16_X,
+      runtime: lambda.Runtime.NODEJS_18_X,
       timeout: cdk.Duration.seconds(300),
+      environment: {
+        AWS_BEDROCK_REGION: 'us-east-1', // Replace with the desired region
+      },
     });
+
+    // Grant the Lambda function permission to access Amazon Bedrock
+    lambdaFunction.role?.attachInlinePolicy(
+      new iam.Policy(this, 'BedrockAccess', {
+        statements: [
+          new iam.PolicyStatement({
+            effect: iam.Effect.ALLOW,
+            actions: ['bedrock:*'],
+            resources: ['*'],
+          }),
+        ],
+      })
+    );
   }
 }

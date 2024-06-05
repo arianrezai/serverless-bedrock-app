@@ -1,15 +1,19 @@
-# Welcome to your CDK TypeScript project
+# Serverless Bedrock App
 
-You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`CdkLambdaSampleStack`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+This project deploys a serverless Lambda function that interacts with Amazon Bedrock. The Lambda function is designed to perform various operations related to Amazon Bedrock, such as creating, updating, or querying resources.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Usage
 
-## Useful commands
+Follow these steps to deploy the application:
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+1. Install the necessary dependencies by running the following command in the project directory:
+   ```
+   npm install
+   ```
+
+2. Deploy the application to AWS by running the following command:
+   ```
+   cdk deploy
+   ```
+
+Make sure you have the AWS Command Line Interface (CLI) installed and configured with the necessary permissions before running the deployment command.
